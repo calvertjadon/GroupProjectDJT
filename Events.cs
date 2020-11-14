@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class Form1 : Form
+    public partial class Events : MenuForm
     {
-        public Form1()
+        public override Panel MainPanel => eventsPanel;
+
+        public Events()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
