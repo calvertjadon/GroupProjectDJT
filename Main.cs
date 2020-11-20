@@ -35,7 +35,8 @@ namespace GroupProjectDJT
             _forms = new List<MenuForm>()
             {
                 new Home(),
-                new Events()
+                new Events(),
+                new MembershipForm()
             };
 
             // Add all panels to dictionary

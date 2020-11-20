@@ -9,7 +9,7 @@ namespace GroupProjectDJT
 {
     public abstract class MenuForm : Form
     {
-        public abstract Panel MainPanel { get; }
+        public virtual Panel MainPanel { get; }
 
         private void InitializeComponent()
         {
@@ -28,5 +28,11 @@ namespace GroupProjectDJT
         {
 
         }
+    }
+
+    public class PanelMenuForm : MenuForm
+    {
+        // this is just a dumb windows form thing apparently
+        // https://stackoverflow.com/questions/1620847/how-can-i-get-visual-studio-2008-windows-forms-designer-to-render-a-form-that-im/2406058#2406058
     }
 }

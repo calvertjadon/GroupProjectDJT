@@ -11,8 +11,10 @@ using MySql.Data.MySqlClient;
 
 namespace GroupProjectDJT
 {
-    public partial class MembershipForm : Form
+    public partial class MembershipForm : PanelMenuForm
     {
+        public override Panel MainPanel => membershipFormPanel;
+
         public MembershipForm()
         {
             InitializeComponent();

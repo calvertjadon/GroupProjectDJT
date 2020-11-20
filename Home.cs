@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class Home : MenuForm
+    public partial class Home : PanelMenuForm
     {
         public override Panel MainPanel => homePanel;
 
