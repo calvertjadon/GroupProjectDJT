@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class ShowEvents : Form
+    public partial class ShowEvents : PanelMenuForm
     {
+        public override Panel MainPanel => showEventsPanel;
+
         public ShowEvents()
         {
             InitializeComponent();

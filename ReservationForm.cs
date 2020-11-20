@@ -10,9 +10,11 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class Form1 : Form
+    public partial class ReservationForm : PanelMenuForm
     {
-        public Form1()
+        public override Panel MainPanel => seatsPanel;
+
+        public ReservationForm()
         {
             InitializeComponent();
         }

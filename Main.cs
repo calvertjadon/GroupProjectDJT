@@ -36,7 +36,9 @@ namespace GroupProjectDJT
             {
                 new Home(),
                 new Events(),
-                new MembershipForm()
+                new MembershipForm(),
+                new ReservationForm(),
+                new ShowEvents()
             };
 
             // Add all panels to dictionary
