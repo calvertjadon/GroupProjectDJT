@@ -10,16 +10,24 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class Home : PanelMenuForm
+    public partial class Form1 : Form
     {
-        public override Panel MainPanel => homePanel;
-
-        public Home()
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private void homePanel_Paint(object sender, PaintEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

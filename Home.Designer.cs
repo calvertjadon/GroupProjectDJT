@@ -41,6 +41,7 @@
             this.homePanel.Size = new System.Drawing.Size(760, 522);
             this.homePanel.TabIndex = 0;
             this.homePanel.Tag = "Home";
+            this.homePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.homePanel_Paint);
             // 
             // label1
             // 

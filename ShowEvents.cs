@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
-    public partial class Home : PanelMenuForm
+    public partial class ShowEvents : Form
     {
-        public override Panel MainPanel => homePanel;
-
-        public Home()
+        public ShowEvents()
         {
             InitializeComponent();
-        }
-
-        private void homePanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
