@@ -134,7 +134,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 546);
             this.Controls.Add(this.showEventsPanel);
-            this.Name = "ShowEvents";
+            // this.Name = "ShowEvents";
             this.Load += new System.EventHandler(this.ShowEvents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.showEventsPanel.ResumeLayout(false);
