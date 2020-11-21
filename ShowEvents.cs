@@ -18,22 +18,9 @@ namespace GroupProjectDJT
         public ShowEvents()
         {
             InitializeComponent();
-        }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
-        private void ShowEvents_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             dataGridView1.Rows.Clear();
-
             string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
             MySql.Data.MySqlClient.MySqlConnection conn3 = new MySql.Data.MySqlClient.MySqlConnection(connStr);
 
@@ -49,7 +36,7 @@ namespace GroupProjectDJT
 
             try
             {
-                
+
                 Console.WriteLine("Connecting to MySQL...");
                 conn3.Open();
                 string sql = "SELECT eventID, name, description, date,time, price, vipPrice FROM djt_event";
@@ -78,6 +65,7 @@ namespace GroupProjectDJT
 
 
                     dataGridView1.Rows.Add(eventID, name, description, date, time, price, vipPrice); //adds to datagridview
+                   
 
 
                 }
@@ -90,9 +78,40 @@ namespace GroupProjectDJT
             conn3.Close();
             Console.WriteLine("Done.");
 
+            
+
+
+
+
+
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ShowEvents_Load(object sender, EventArgs e)
+        {
+
+          
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            
+
+
         }
 
         private void showEventsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
