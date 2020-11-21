@@ -71,9 +71,10 @@ namespace GroupProjectDJT
                     time = myReader["time"].ToString();
                     price = myReader["price"].ToString();
                     vipPrice = myReader["vipPrice"].ToString();
-                    date = date.Substring(0, date.Length - 11); //cuts off annoying timestamp 
+                    date = date.Substring(0, 10); //cuts off annoying timestamp 
 
-
+                    price = "$" + price;
+                    vipPrice = "$" + vipPrice;
 
 
                     dataGridView1.Rows.Add(eventID, name, description, date, time, price, vipPrice); //adds to datagridview
@@ -88,6 +89,11 @@ namespace GroupProjectDJT
             }
             conn3.Close();
             Console.WriteLine("Done.");
+
+        }
+
+        private void showEventsPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
