@@ -18,7 +18,15 @@ namespace GroupProjectDJT
         {
             set
             {
-                this.eventIdLabel.Text = "Event ID: " + value;
+                eventIdLabel.Text = "Event ID: " + value;
+            }
+        }
+
+        public string EventTitle
+        {
+            set
+            {
+                eventSelectionTitleLabel.Text = "Here are all the seats for: " + value;
             }
         }
 
@@ -83,6 +91,14 @@ namespace GroupProjectDJT
             cb.BackColor = cb.Checked ? Color.LawnGreen : Color.White;
 
             countLabel.Text = numSelected.ToString();
+        }
+
+        public void clearSeatSelection()
+        {
+            foreach (var cb in checkboxes)
+            {
+                cb.Checked = false;
+            }
         }
     }
 }

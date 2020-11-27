@@ -68,6 +68,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(45, 30);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(646, 367);
             this.dataGridView1.TabIndex = 1;
@@ -77,38 +78,45 @@
             // 
             this.EventID.HeaderText = "Event ID Number";
             this.EventID.Name = "EventID";
+            this.EventID.ReadOnly = true;
             // 
             // Name
             // 
             this.Name.HeaderText = "Name";
             this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
             this.Name.Width = 200;
             // 
             // Description
             // 
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
             this.Description.Width = 500;
             // 
             // Date
             // 
             this.Date.HeaderText = "Date";
             this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "Time";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Standard Price";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "VIP Price";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // button1
             // 
@@ -138,6 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 546);
             this.Controls.Add(this.showEventsPanel);
+            //this.Name = "ShowEvents";
             this.Load += new System.EventHandler(this.ShowEvents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.showEventsPanel.ResumeLayout(false);

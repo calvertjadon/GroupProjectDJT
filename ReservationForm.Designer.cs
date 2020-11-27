@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.eventSelectionTitleLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.seatCheckBox2 = new System.Windows.Forms.CheckBox();
             this.seatCheckBox4 = new System.Windows.Forms.CheckBox();
@@ -136,6 +136,7 @@
             this.checkBox97 = new System.Windows.Forms.CheckBox();
             this.checkBox98 = new System.Windows.Forms.CheckBox();
             this.seatsPanel = new System.Windows.Forms.Panel();
+            this.eventIdLabel = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -159,7 +160,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.countLabel = new System.Windows.Forms.Label();
-            this.eventIdLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.seatsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -173,14 +173,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Create a reservation!";
             // 
-            // label2
+            // eventSelectionTitleLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(155, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Here are all the seats for your event";
+            this.eventSelectionTitleLabel.AutoSize = true;
+            this.eventSelectionTitleLabel.Location = new System.Drawing.Point(155, 0);
+            this.eventSelectionTitleLabel.Name = "eventSelectionTitleLabel";
+            this.eventSelectionTitleLabel.Size = new System.Drawing.Size(175, 13);
+            this.eventSelectionTitleLabel.TabIndex = 2;
+            this.eventSelectionTitleLabel.Text = "Here are all the seats for your event";
             // 
             // tableLayoutPanel1
             // 
@@ -1903,7 +1903,7 @@
             this.seatsPanel.Controls.Add(this.label16);
             this.seatsPanel.Controls.Add(this.label15);
             this.seatsPanel.Controls.Add(this.label3);
-            this.seatsPanel.Controls.Add(this.label2);
+            this.seatsPanel.Controls.Add(this.eventSelectionTitleLabel);
             this.seatsPanel.Controls.Add(this.tableLayoutPanel1);
             this.seatsPanel.Controls.Add(this.countLabel);
             this.seatsPanel.Controls.Add(this.label1);
@@ -1912,6 +1912,15 @@
             this.seatsPanel.Size = new System.Drawing.Size(760, 522);
             this.seatsPanel.TabIndex = 4;
             this.seatsPanel.Tag = "Seats";
+            // 
+            // eventIdLabel
+            // 
+            this.eventIdLabel.AutoSize = true;
+            this.eventIdLabel.Location = new System.Drawing.Point(634, 38);
+            this.eventIdLabel.Name = "eventIdLabel";
+            this.eventIdLabel.Size = new System.Drawing.Size(41, 13);
+            this.eventIdLabel.TabIndex = 4;
+            this.eventIdLabel.Text = "label25";
             // 
             // label12
             // 
@@ -2119,15 +2128,6 @@
             this.countLabel.Size = new System.Drawing.Size(0, 13);
             this.countLabel.TabIndex = 1;
             // 
-            // eventIdLabel
-            // 
-            this.eventIdLabel.AutoSize = true;
-            this.eventIdLabel.Location = new System.Drawing.Point(634, 38);
-            this.eventIdLabel.Name = "eventIdLabel";
-            this.eventIdLabel.Size = new System.Drawing.Size(41, 13);
-            this.eventIdLabel.TabIndex = 4;
-            this.eventIdLabel.Text = "label25";
-            // 
             // ReservationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2146,7 +2146,7 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label eventSelectionTitleLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox seatCheckBox3;
         private System.Windows.Forms.Panel seatsPanel;

@@ -103,12 +103,17 @@ namespace GroupProjectDJT
         private void button1_Click(object sender, EventArgs e)
         {
 
+            var reservationForm = ((ReservationForm) _parent._forms["ReservationForm"].Item2);
+
             string EventId = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            // MessageBox.Show(EventId);
+            string EventTitle = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+
+            reservationForm.EventId = EventId;
+            reservationForm.EventTitle = EventTitle;
+            reservationForm.clearSeatSelection();
 
             _parent.showPanel("Seats");
 
-            ((ReservationForm) _parent._forms["ReservationForm"].Item2).EventId = EventId;
         }
 
         private void showEventsPanel_Paint(object sender, PaintEventArgs e)
