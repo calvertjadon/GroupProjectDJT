@@ -14,6 +14,22 @@ namespace GroupProjectDJT
     {
         public override Panel MainPanel => seatsPanel;
 
+        public string EventId
+        {
+            set
+            {
+                eventIdLabel.Text = "Event ID: " + value;
+            }
+        }
+
+        public string EventTitle
+        {
+            set
+            {
+                eventSelectionTitleLabel.Text = "Here are all the seats for: " + value;
+            }
+        }
+
         private Dictionary<String, Color> _checkboxColors = new Dictionary<String, Color>()
         {
             {"Checked", Color.LawnGreen},
@@ -77,9 +93,12 @@ namespace GroupProjectDJT
             countLabel.Text = numSelected.ToString();
         }
 
-        private void seatsPanel_Paint(object sender, PaintEventArgs e)
+        public void clearSeatSelection()
         {
-
+            foreach (var cb in checkboxes)
+            {
+                cb.Checked = false;
+            }
         }
     }
 }

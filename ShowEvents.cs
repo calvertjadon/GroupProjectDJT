@@ -14,11 +14,13 @@ namespace GroupProjectDJT
     public partial class ShowEvents : PanelMenuForm
     {
         public override Panel MainPanel => showEventsPanel;
+        private Main _parent;
 
-        public ShowEvents()
+        public ShowEvents(Main parent)
         {
             InitializeComponent();
 
+            _parent = parent;
 
             dataGridView1.Rows.Clear();
             string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
@@ -31,7 +33,6 @@ namespace GroupProjectDJT
             String price;
             String vipPrice;
             String date;
-            String eventReservationID;
 
 
 
@@ -102,8 +103,16 @@ namespace GroupProjectDJT
         private void button1_Click(object sender, EventArgs e)
         {
 
-           String eventReservationID = textBox1.Text;
-           
+            var reservationForm = ((ReservationForm) _parent._forms["ReservationForm"].Item2);
+
+            string EventId = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string EventTitle = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+
+            reservationForm.EventId = EventId;
+            reservationForm.EventTitle = EventTitle;
+            reservationForm.clearSeatSelection();
+
+            _parent.showPanel("Seats");
 
         }
 
@@ -113,11 +122,6 @@ namespace GroupProjectDJT
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
         {
 
         }
