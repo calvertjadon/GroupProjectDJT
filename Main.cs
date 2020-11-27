@@ -10,10 +10,38 @@ using System.Windows.Forms;
 
 namespace GroupProjectDJT
 {
+    // custom mutable "tuple" class
+    public class Pair<T, U>
+    {
+        public Pair()
+        {
+        }
+
+        public Pair(T first, U second)
+        {
+            this.First = first;
+            this.Second = second;
+        }
+
+        public T First { get; set; }
+        public U Second { get; set; }
+    };
+
     public partial class Main : Form
     {
-        public Dictionary<String, Tuple<bool, MenuForm>> _forms;
+        public Dictionary<String, Pair<bool, MenuForm>> _forms;
         public Dictionary<String, Panel> _panels;
+
+        public int MemberId = -1;
+
+        public bool ShowLogoutMenuItem
+        {
+            set
+            {
+                // logout menu item will always be last item
+                menuStrip1.Items[menuStrip1.Items.Count - 1].Visible = value;
+            }
+        }
 
         public Main()
         {
@@ -32,25 +60,26 @@ namespace GroupProjectDJT
              */
 
             // Order specified here determines the order in the menu and which is displayed on startup
-            _forms = new Dictionary<String, Tuple<bool, MenuForm>>()
+            _forms = new Dictionary<String, Pair<bool, MenuForm>>()
             {
                 // set bool to true of it needs a menu item.  otherwise it will be hidden.
-                {"Home", new Tuple<bool, MenuForm>(true, new Home())},
-                {"ShowEvents", new Tuple<bool, MenuForm>(true, new ShowEvents(this))},
-                {"MembershipForm", new Tuple<bool, MenuForm>(true, new MembershipForm())},
-                {"ReservationForm", new Tuple<bool, MenuForm>(false, new ReservationForm())},
-                {"LoginForm", new Tuple<bool, MenuForm>(true, new LoginForm())}
-                
+                {"Home", new Pair<bool, MenuForm>(true, new Home())},
+                {"ShowEvents", new Pair<bool, MenuForm>(true, new ShowEvents(this))},
+                {"ReservationForm", new Pair<bool, MenuForm>(false, new ReservationForm())},
+                {"MembershipForm", new Pair<bool, MenuForm>(true, new MembershipForm(this))},
+                {"LoginForm", new Pair<bool, MenuForm>(true, new LoginForm(this))},
+                {"Profile", new Pair<bool, MenuForm>(false, new Profile(this))},
+
             };
 
             // Add all panels to dictionary
             _panels = new Dictionary<string, Panel>();
 
-            foreach (Tuple<bool, MenuForm> menuForm in _forms.Values)
+            foreach (Pair<bool, MenuForm> menuForm in _forms.Values)
             {
                 // Since all forms inherit from abstract class MenuForm,
                 //  we know that they all must contain an implementation of MainPanel
-                Panel panel = menuForm.Item2.MainPanel;
+                Panel panel = menuForm.Second.MainPanel;
 
                 // Add panels to main form
                 this.Controls.Add(panel);
@@ -60,18 +89,27 @@ namespace GroupProjectDJT
                 // menu item text is stored in Tag
                 var title = panel.Tag.ToString();
 
+                // Dynamically generate toolStrinMenuItem(s)
+                var menuItem = new ToolStripMenuItem(title);
+                menuItem.Click += this.toolStripMenuItem_Click;
+                menuStrip1.Items.Add(menuItem);
+
                 // the menuForm.Item1 is a bool indicating whether or not the form should be shown in the menu
-                if (menuForm.Item1)
+                if (!menuForm.First)
                 {
-                    // Dynamically generate toolStrinMenuItem(s)
-                    var menuItem = new ToolStripMenuItem(title);
-                    menuItem.Click += this.toolStripMenuItem_Click;
-                    menuStrip1.Items.Add(menuItem);
+                    
+                    menuItem.Visible = false;
                 }
 
                 _panels[title] = panel;
 
             }
+
+            // Dynamically generate toolStrinMenuItem(s)
+            var logoutMenuItem = new ToolStripMenuItem("Logout");
+            logoutMenuItem.Click += this.logoutMember;
+            logoutMenuItem.Visible = false;
+            menuStrip1.Items.Add(logoutMenuItem);
 
             // first panel is shown by default
             _panels.Values.First().Show();
@@ -93,6 +131,51 @@ namespace GroupProjectDJT
             }
 
             _panels[title].Show();
+        }
+
+        public void setMember(int memberId)
+        {
+            MemberId = memberId;
+
+            _forms["LoginForm"].First = false;
+            _forms["MembershipForm"].First = false;
+            _forms["Profile"].First = true;
+            ShowLogoutMenuItem = true;
+
+            Profile ProfileForm = (Profile)_forms["Profile"].Second;
+            ProfileForm.LoadMember();
+            ProfileForm.loadEventHistory();
+
+            refreshMenu();
+
+            showPanel("Upcoming Events");
+        }
+
+        private void logoutMember(object sender, EventArgs e)
+        {
+            MemberId = -1;
+
+            _forms["LoginForm"].First = true;
+            _forms["MembershipForm"].First = true;
+            _forms["Profile"].First = false;
+            ShowLogoutMenuItem = false;
+
+            refreshMenu();
+
+            showPanel("Login");
+        }
+
+        public void refreshMenu()
+        {
+            for (int i = 0; i < _forms.Values.Count; i++)
+            {
+                Pair<bool, MenuForm> menuForm = _forms.Values.ToList()[i];
+
+                Panel panel = menuForm.Second.MainPanel;
+                var title = panel.Tag.ToString();
+
+                menuStrip1.Items[i].Visible = menuForm.First;
+            }
         }
     }
 }
