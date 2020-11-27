@@ -14,12 +14,17 @@ namespace GroupProjectDJT
     {
         public override Panel MainPanel => seatsPanel;
 
+        private string _eventId;
+
         public string EventId
         {
             set
             {
-                eventIdLabel.Text = "Event ID: " + value;
+                _eventId = value;
+                eventIdLabel.Text = "Event ID: " + _eventId;
             }
+
+            get => _eventId;
         }
 
         public string EventTitle
@@ -61,7 +66,7 @@ namespace GroupProjectDJT
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

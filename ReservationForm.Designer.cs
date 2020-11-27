@@ -704,7 +704,7 @@
             this.checkBox20.Name = "checkBox20";
             this.checkBox20.Size = new System.Drawing.Size(25, 25);
             this.checkBox20.TabIndex = 0;
-            this.checkBox20.Tag = "1";
+            this.checkBox20.Tag = "7";
             this.checkBox20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBox20.UseVisualStyleBackColor = false;
             // 
@@ -1912,7 +1912,6 @@
             this.seatsPanel.Size = new System.Drawing.Size(760, 522);
             this.seatsPanel.TabIndex = 4;
             this.seatsPanel.Tag = "Seats";
-            this.seatsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.seatsPanel_Paint);
             // 
             // eventIdLabel
             // 
