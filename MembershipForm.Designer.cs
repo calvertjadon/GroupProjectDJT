@@ -153,6 +153,7 @@
             this.membershipFormPanel.Size = new System.Drawing.Size(760, 522);
             this.membershipFormPanel.TabIndex = 11;
             this.membershipFormPanel.Tag = "Register";
+            this.membershipFormPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.membershipFormPanel_Paint);
             // 
             // MembershipForm
             // 

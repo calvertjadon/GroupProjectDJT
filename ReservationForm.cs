@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -104,6 +105,87 @@ namespace GroupProjectDJT
             {
                 cb.Checked = false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //get the price and VIP price from the database
+
+            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+            MySql.Data.MySqlClient.MySqlConnection conn3 = new MySql.Data.MySqlClient.MySqlConnection(connStr);
+
+            double price2 = 0.0;
+            double vipPrice2 = 0.0;
+
+            try
+            {
+
+                Console.WriteLine("Connecting to MySQL...");
+                conn3.Open();
+                string sql = "SELECT price, vipPrice FROM djt_event WHERE eventID = @eventID";
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn3);
+
+                cmd.Parameters.AddWithValue("@eventID", _eventId);
+
+
+                MySqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+
+                    String price = myReader["price"].ToString();
+                    String vipPrice = myReader["vipPrice"].ToString();
+
+                     price2 = Convert.ToDouble(price);
+                     vipPrice2 = Convert.ToDouble(vipPrice);
+
+                  
+                   
+
+                }
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn3.Close();
+            Console.WriteLine("Done.");
+
+
+            double sum = 0.0;
+
+            foreach (var checkbox in checkboxes)
+            {
+                if (checkbox.Checked)
+                {
+
+                    String checkboxTag = checkbox.Tag.ToString();
+                    int tag = Convert.ToInt32(checkboxTag);
+                    label26.Text = checkboxTag;
+
+
+                    if (tag > 32)
+                    {
+                        label2.Text = "Bruh";
+                        sum = sum + price2;
+                        label25.Text = sum.ToString();
+                    }
+                    else
+                    {
+                        label2.Text = "VIP IN THE HOUSE";
+                        sum = sum + vipPrice2;
+                        label25.Text = sum.ToString();
+                    }
+
+
+                }
+            }
+
+            
+
+
+
+
         }
     }
 }

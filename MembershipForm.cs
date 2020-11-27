@@ -110,5 +110,10 @@ namespace GroupProjectDJT
             Console.WriteLine("Done.");
 
         }
+
+        private void membershipFormPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
