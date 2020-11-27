@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace GroupProjectDJT
             set
             {
                 eventIdLabel.Text = "Event ID: " + value;
+                
             }
         }
 
@@ -99,6 +101,55 @@ namespace GroupProjectDJT
             {
                 cb.Checked = false;
             }
+        }
+
+        private void seatsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //getting the price from the event database
+            double price = 0.0;
+            double vipPrice = 0.0;
+
+            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+            MySql.Data.MySqlClient.MySqlConnection conn3 = new MySql.Data.MySqlClient.MySqlConnection(connStr);
+
+            try
+            {
+
+                Console.WriteLine("Connecting to MySQL...");
+                conn3.Open();
+                string sql = "SELECT price, vipPrice, FROM djt_event WHERE eventID = @eventID";
+
+
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn3);
+
+
+
+
+                MySqlDataReader myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+
+               
+
+
+                }
+                myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn3.Close();
+            Console.WriteLine("Done.");
+
+
+
+
         }
     }
 }

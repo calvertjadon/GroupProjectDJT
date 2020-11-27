@@ -152,7 +152,7 @@
             this.label2.Size = new System.Drawing.Size(232, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Enter the Event ID you would like to register for,";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+         //   this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox1
             // 
