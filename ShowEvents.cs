@@ -103,7 +103,7 @@ namespace GroupProjectDJT
         {
 
            String eventReservationID = textBox1.Text;
-
+           
 
         }
 
@@ -113,6 +113,11 @@ namespace GroupProjectDJT
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

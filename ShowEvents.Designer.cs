@@ -39,8 +39,8 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.showEventsPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.showEventsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -132,13 +132,6 @@
             this.showEventsPanel.Tag = "Show Events";
             this.showEventsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.showEventsPanel_Paint);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(285, 448);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 3;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -147,6 +140,14 @@
             this.label2.Size = new System.Drawing.Size(232, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Enter the Event ID you would like to register for,";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(285, 448);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 20);
+            this.textBox1.TabIndex = 3;
             // 
             // ShowEvents
             // 
@@ -154,7 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 546);
             this.Controls.Add(this.showEventsPanel);
-           
+            this.Name = "ShowEvents";
             this.Load += new System.EventHandler(this.ShowEvents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.showEventsPanel.ResumeLayout(false);
