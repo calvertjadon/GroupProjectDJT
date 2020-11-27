@@ -136,6 +136,7 @@
             this.checkBox97 = new System.Windows.Forms.CheckBox();
             this.checkBox98 = new System.Windows.Forms.CheckBox();
             this.seatsPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.eventIdLabel = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -160,7 +161,9 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.countLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.seatsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -1881,6 +1884,9 @@
             // 
             // seatsPanel
             // 
+            this.seatsPanel.Controls.Add(this.label26);
+            this.seatsPanel.Controls.Add(this.label25);
+            this.seatsPanel.Controls.Add(this.label2);
             this.seatsPanel.Controls.Add(this.button1);
             this.seatsPanel.Controls.Add(this.eventIdLabel);
             this.seatsPanel.Controls.Add(this.label12);
@@ -1914,6 +1920,16 @@
             this.seatsPanel.Size = new System.Drawing.Size(760, 522);
             this.seatsPanel.TabIndex = 4;
             this.seatsPanel.Tag = "Seats";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(626, 372);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 94);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Create A reservation!";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // eventIdLabel
             // 
@@ -2130,15 +2146,32 @@
             this.countLabel.Size = new System.Drawing.Size(0, 13);
             this.countLabel.TabIndex = 1;
             // 
-            // button1
+            // label2
             // 
-            this.button1.Location = new System.Drawing.Point(626, 372);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 94);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Create A reservation!";
-            this.button1.UseVisualStyleBackColor = true;
-            //this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(664, 223);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "label2";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(667, 245);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(41, 13);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "label25";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(667, 312);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(41, 13);
+            this.label26.TabIndex = 8;
+            this.label26.Text = "label26";
             // 
             // ReservationForm
             // 
@@ -2290,5 +2323,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label eventIdLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
     }
 }
