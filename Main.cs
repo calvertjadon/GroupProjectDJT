@@ -39,6 +39,7 @@ namespace GroupProjectDJT
                 {"ShowEvents", new Tuple<bool, MenuForm>(true, new ShowEvents(this))},
                 {"MembershipForm", new Tuple<bool, MenuForm>(true, new MembershipForm())},
                 {"ReservationForm", new Tuple<bool, MenuForm>(false, new ReservationForm())},
+                {"LoginForm", new Tuple<bool, MenuForm>(true, new LoginForm())}
                 
             };
 
