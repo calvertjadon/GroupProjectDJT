@@ -39,6 +39,8 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.showEventsPanel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.showEventsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -112,12 +114,14 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 47);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Create A reservation!";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // showEventsPanel
             // 
+            this.showEventsPanel.Controls.Add(this.label2);
+            this.showEventsPanel.Controls.Add(this.textBox1);
             this.showEventsPanel.Controls.Add(this.dataGridView1);
             this.showEventsPanel.Controls.Add(this.button1);
             this.showEventsPanel.Controls.Add(this.label1);
@@ -128,13 +132,29 @@
             this.showEventsPanel.Tag = "Show Events";
             this.showEventsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.showEventsPanel_Paint);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(285, 448);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 451);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(232, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Enter the Event ID you would like to register for,";
+            // 
             // ShowEvents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 546);
             this.Controls.Add(this.showEventsPanel);
-            // this.Name = "ShowEvents";
+           
             this.Load += new System.EventHandler(this.ShowEvents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.showEventsPanel.ResumeLayout(false);
@@ -156,5 +176,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

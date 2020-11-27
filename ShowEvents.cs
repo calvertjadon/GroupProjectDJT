@@ -31,6 +31,7 @@ namespace GroupProjectDJT
             String price;
             String vipPrice;
             String date;
+            String eventReservationID;
 
 
 
@@ -100,8 +101,8 @@ namespace GroupProjectDJT
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-            
+
+           String eventReservationID = textBox1.Text;
 
 
         }

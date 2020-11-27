@@ -76,5 +76,10 @@ namespace GroupProjectDJT
 
             countLabel.Text = numSelected.ToString();
         }
+
+        private void seatsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
