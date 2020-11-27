@@ -14,6 +14,14 @@ namespace GroupProjectDJT
     {
         public override Panel MainPanel => seatsPanel;
 
+        public string EventId
+        {
+            set
+            {
+                this.eventIdLabel.Text = "Event ID: " + value;
+            }
+        }
+
         private Dictionary<String, Color> _checkboxColors = new Dictionary<String, Color>()
         {
             {"Checked", Color.LawnGreen},

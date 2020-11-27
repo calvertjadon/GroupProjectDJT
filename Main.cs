@@ -12,8 +12,8 @@ namespace GroupProjectDJT
 {
     public partial class Main : Form
     {
-        private List<MenuForm> _forms;
-        private Dictionary<String, Panel> _panels;
+        public Dictionary<String, Tuple<bool, MenuForm>> _forms;
+        public Dictionary<String, Panel> _panels;
 
         public Main()
         {
@@ -32,35 +32,41 @@ namespace GroupProjectDJT
              */
 
             // Order specified here determines the order in the menu and which is displayed on startup
-            _forms = new List<MenuForm>()
+            _forms = new Dictionary<String, Tuple<bool, MenuForm>>()
             {
-                new Home(),
-                new Events(),
-                new MembershipForm(),
-                new ReservationForm(),
-                new ShowEvents()
+                // set bool to true of it needs a menu item.  otherwise it will be hidden.
+                {"Home", new Tuple<bool, MenuForm>(true, new Home())},
+                {"ShowEvents", new Tuple<bool, MenuForm>(true, new ShowEvents(this))},
+                {"MembershipForm", new Tuple<bool, MenuForm>(true, new MembershipForm())},
+                {"ReservationForm", new Tuple<bool, MenuForm>(false, new ReservationForm())},
+                
             };
 
             // Add all panels to dictionary
             _panels = new Dictionary<string, Panel>();
 
-            foreach (MenuForm menuForm in _forms)
+            foreach (Tuple<bool, MenuForm> menuForm in _forms.Values)
             {
                 // Since all forms inherit from abstract class MenuForm,
                 //  we know that they all must contain an implementation of MainPanel
-                Panel panel = menuForm.MainPanel;
+                Panel panel = menuForm.Item2.MainPanel;
 
                 // Add panels to main form
                 this.Controls.Add(panel);
                 panel.Location = new Point(12, 27);
                 panel.Hide(); // hide all by default
 
-                // Dynamically generate toolStrinMenuItem(s)
                 // menu item text is stored in Tag
                 var title = panel.Tag.ToString();
-                var menuItem = new ToolStripMenuItem(title);
-                menuItem.Click += this.toolStripMenuItem_Click;
-                menuStrip1.Items.Add(menuItem);
+
+                // the menuForm.Item1 is a bool indicating whether or not the form should be shown in the menu
+                if (menuForm.Item1)
+                {
+                    // Dynamically generate toolStrinMenuItem(s)
+                    var menuItem = new ToolStripMenuItem(title);
+                    menuItem.Click += this.toolStripMenuItem_Click;
+                    menuStrip1.Items.Add(menuItem);
+                }
 
                 _panels[title] = panel;
 
@@ -73,13 +79,18 @@ namespace GroupProjectDJT
 
         private void toolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var title = ((ToolStripMenuItem)sender).Text;
+            showPanel(title);
+        }
+
+        public void showPanel(string title)
+        {
             // hide all panels and show panel that corresponds with menu selection
             foreach (Panel panel in _panels.Values)
             {
                 panel.Hide();
             }
 
-            var title = ((ToolStripMenuItem) sender).Text;
             _panels[title].Show();
         }
     }

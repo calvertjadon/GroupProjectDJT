@@ -14,11 +14,13 @@ namespace GroupProjectDJT
     public partial class ShowEvents : PanelMenuForm
     {
         public override Panel MainPanel => showEventsPanel;
+        private Main _parent;
 
-        public ShowEvents()
+        public ShowEvents(Main parent)
         {
             InitializeComponent();
 
+            _parent = parent;
 
             dataGridView1.Rows.Clear();
             string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
@@ -100,10 +102,13 @@ namespace GroupProjectDJT
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-            
 
+            string EventId = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            // MessageBox.Show(EventId);
 
+            _parent.showPanel("Seats");
+
+            ((ReservationForm) _parent._forms["ReservationForm"].Item2).EventId = EventId;
         }
 
         private void showEventsPanel_Paint(object sender, PaintEventArgs e)

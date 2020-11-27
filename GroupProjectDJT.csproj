@@ -50,12 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Events.Designer.cs">
-      <DependentUpon>Events.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReservationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,9 +85,6 @@
     <Compile Include="ShowEvents.Designer.cs">
       <DependentUpon>ShowEvents.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Events.resx">
-      <DependentUpon>Events.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
