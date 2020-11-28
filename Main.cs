@@ -69,6 +69,7 @@ namespace GroupProjectDJT
                 {"MembershipForm", new Pair<bool, MenuForm>(true, new MembershipForm(this))},
                 {"LoginForm", new Pair<bool, MenuForm>(true, new LoginForm(this))},
                 {"Profile", new Pair<bool, MenuForm>(false, new Profile(this))},
+                {"ReservationDetails", new Pair<bool, MenuForm>(false, new ReservationDetails(this))},
 
             };
 
@@ -148,6 +149,9 @@ namespace GroupProjectDJT
 
             refreshMenu();
 
+            ShowEvents ShowEventsForm = (ShowEvents) _forms["ShowEvents"].Second;
+            ShowEventsForm.populateDataGrid();
+
             showPanel("Upcoming Events");
         }
 
@@ -161,6 +165,9 @@ namespace GroupProjectDJT
             ShowLogoutMenuItem = false;
 
             refreshMenu();
+
+            ShowEvents ShowEventsForm = (ShowEvents)_forms["ShowEvents"].Second;
+            ShowEventsForm.populateDataGrid();
 
             showPanel("Login");
         }

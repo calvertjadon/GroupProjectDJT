@@ -40,6 +40,7 @@ namespace GroupProjectDJT
         {
             {"Checked", Color.LawnGreen},
             {"Unchecked", Color.White},
+            {"Unavailable", Color.Red}
         };
 
         private List<CheckBox> checkboxes;
@@ -53,11 +54,12 @@ namespace GroupProjectDJT
             Console.WriteLine("Loaded");
             checkboxes = tableLayoutPanel1.Controls.OfType<CheckBox>().ToList();
 
-            foreach (var cb in checkboxes)
+            foreach (CheckBox cb in checkboxes)
             {
-                cb.CheckedChanged += checkBox_CheckedChanged;
-                cb.BackColor = _checkboxColors["Unchecked"];
-            }
+                cb.Click += checkBox_CheckedChanged;
+            };
+
+            updateSeats();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -191,6 +193,70 @@ namespace GroupProjectDJT
         private void seatsPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void updateSeats()
+        {
+            List<int> unavailableSeats = getUnavailableSeats();
+
+            foreach (var cb in checkboxes)
+            {
+                if (unavailableSeats.Contains(Int32.Parse(cb.Tag.ToString())))
+                {
+                    cb.Enabled = false;
+                    cb.BackColor = _checkboxColors["Unavailable"];
+                }
+                else
+                {
+                    cb.Enabled = true;
+                    cb.BackColor = _checkboxColors["Unchecked"];
+                }
+            }
+        }
+
+        private List<int> getUnavailableSeats()
+        {
+            List<int> unavailableSeats = new List<int>();
+
+            DataTable myTable = new DataTable();
+
+            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                Console.WriteLine("Connecting to MySQL...");
+                conn.Open();
+                string sql = $@"SELECT
+	                            sr.seatId
+                            FROM
+	                            djt_seat_reservation sr
+                            INNER JOIN
+	                            djt_reservation r
+                            ON
+	                            sr.reservationId=r.id
+                            WHERE
+	                            r.eventID=@eventId;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@eventId", EventId);
+
+                MySqlDataAdapter myAdapter = new MySqlDataAdapter(cmd);
+                myAdapter.Fill(myTable);
+                Console.WriteLine("Table is ready.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            //convert the retrieved data to events and save them to the list
+            foreach (DataRow row in myTable.Rows)
+            {
+                unavailableSeats.Add(Int32.Parse(row["seatId"].ToString()));
+            }
+
+            Console.WriteLine("Unavailable seats: " + String.Join(", ", unavailableSeats));
+            return unavailableSeats;
         }
     }
 }

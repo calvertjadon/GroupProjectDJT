@@ -62,6 +62,12 @@
     <Compile Include="Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReservationDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationDetails.Designer.cs">
+      <DependentUpon>ReservationDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReservationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReservationDetails.resx">
+      <DependentUpon>ReservationDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReservationForm.resx">
       <DependentUpon>ReservationForm.cs</DependentUpon>
     </EmbeddedResource>
