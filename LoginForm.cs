@@ -56,6 +56,12 @@ namespace GroupProjectDJT
 
                     _parent.setMember(memberId);
 
+                    ReservationDetails detailsForm = ((ReservationDetails)_parent._forms["ReservationDetails"].Second);
+                    detailsForm.memberID = memberId.ToString();
+
+
+
+
                     clearInputs();
                 }
                 else
@@ -81,5 +87,14 @@ namespace GroupProjectDJT
             }
         }
 
+        private void loginPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

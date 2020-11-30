@@ -14,6 +14,34 @@ namespace GroupProjectDJT
     public partial class ReservationForm : PanelMenuForm
     {
         public override Panel MainPanel => seatsPanel;
+        private Main _parent;
+        string eventTitle;
+        string eventdate;
+
+        public ReservationForm(Main parent)
+        {
+            InitializeComponent();
+
+            Console.WriteLine("Loaded");
+            checkboxes = tableLayoutPanel1.Controls.OfType<CheckBox>().ToList();
+
+            foreach (CheckBox cb in checkboxes)
+            {
+                cb.Click += checkBox_CheckedChanged;
+            };
+
+            updateSeats();
+
+
+            _parent = parent;
+
+            
+
+        }
+
+
+
+
 
         private string _eventId;
 
@@ -28,11 +56,41 @@ namespace GroupProjectDJT
             get => _eventId;
         }
 
-        public string EventTitle
+
+        public string Eventdate
         {
             set
             {
+               eventdate = value;
+                label2.Text = "Event date: " + eventdate;
+            }
+
+            get => eventdate;
+        }
+
+
+
+
+
+
+
+
+
+        public string EventTitle
+        {
+
+            get
+            {
+                return eventTitle;
+            }
+
+
+
+            set
+            {
                 eventSelectionTitleLabel.Text = "Here are all the seats for: " + value;
+                eventTitle = value;
+                
             }
         }
 
@@ -163,30 +221,37 @@ namespace GroupProjectDJT
 
                     String checkboxTag = checkbox.Tag.ToString();
                     int tag = Convert.ToInt32(checkboxTag);
-                    label26.Text = checkboxTag;
+                    
 
 
                     if (tag > 32)
                     {
-                        label2.Text = "Bruh";
+                        
                         sum = sum + price2;
-                        label25.Text = sum.ToString();
+                        
                     }
                     else
                     {
-                        label2.Text = "VIP IN THE HOUSE";
+                        
                         sum = sum + vipPrice2;
-                        label25.Text = sum.ToString();
+                        
                     }
 
 
                 }
             }
 
+
+            //need to swap to Reservation details and pass the sum to that class as well.
+
+           ReservationDetails detailsForm = ((ReservationDetails)_parent._forms["ReservationDetails"].Second);
+            detailsForm.sum = sum;
+            detailsForm.EventName = EventTitle;
+            detailsForm.EventDate = Eventdate;
             
 
-
-
+            _parent.showPanel("Reservation Details");
+            
 
         }
 

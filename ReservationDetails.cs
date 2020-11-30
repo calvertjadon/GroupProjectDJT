@@ -14,8 +14,13 @@ namespace GroupProjectDJT
 	public partial class ReservationDetails : PanelMenuForm
 	{
 		public override Panel MainPanel => reservaionDetailsPanel;
+		public string memberid_ = "0";
+		double sum_;
+		
+		
 
-		public int ReservationId {
+
+public int ReservationId {
 			get;
 			set;
 		}
@@ -45,6 +50,54 @@ namespace GroupProjectDJT
 			}
 		}
 
+		public double sum
+		{
+
+
+			get
+			{
+				return sum_;
+			}
+
+
+
+
+			set
+			{
+				label1.Text = "Current cost of reservation: $" + value.ToString();
+				sum_ = value;
+			}
+		}
+
+		public string memberID
+		{
+			
+
+
+			get
+			{
+				return memberid_;
+			}
+			
+
+			set
+			{
+				memberid_ = value;
+				if (memberID == "0")
+				{
+					label3.Text = "You are not logged in";
+				}
+				else
+				{
+					label3.Text = memberid_ + " is your membership id ";
+					//apply discount 
+					sum_ = sum_ * 0.90;
+					label1.Text = sum_.ToString();
+				}
+			}
+		}
+
+
 		private Main _parent;
 
 		public ReservationDetails(Main parent)
@@ -52,9 +105,24 @@ namespace GroupProjectDJT
 			InitializeComponent();
 
 			_parent = parent;
+
+			label3.Text = "You are not logged in";
+
+		
+
+			//create a reservation
+
+
 		}
 
-		private void cancelReservationButton_Click(object sender, EventArgs e)
+
+		
+
+
+
+
+
+private void cancelReservationButton_Click(object sender, EventArgs e)
 		{
 			var confirmResult = MessageBox.Show(
 				"Are you sure you want to cancel this reservation?",
@@ -127,6 +195,11 @@ namespace GroupProjectDJT
 			{
 				Console.WriteLine(ex.ToString());
 			}
+		}
+
+		private void reservaionDetailsPanel_Paint(object sender, PaintEventArgs e)
+		{
+
 		}
 	}
 }

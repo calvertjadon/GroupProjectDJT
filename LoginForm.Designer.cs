@@ -50,6 +50,7 @@
             this.loginPanel.Size = new System.Drawing.Size(760, 522);
             this.loginPanel.TabIndex = 0;
             this.loginPanel.Tag = "Login";
+            this.loginPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.loginPanel_Paint);
             // 
             // loginButton
             // 
@@ -91,7 +92,7 @@
             // emailTextBox
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.emailTextBox.Location = new System.Drawing.Point(79, 15);
+            this.emailTextBox.Location = new System.Drawing.Point(78, 15);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(199, 20);
             this.emailTextBox.TabIndex = 0;
@@ -100,7 +101,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 18);
+            this.label1.Location = new System.Drawing.Point(34, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 1;
@@ -110,7 +111,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 68);
+            this.label2.Location = new System.Drawing.Point(13, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 1;
@@ -119,7 +120,7 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.passwordTextBox.Location = new System.Drawing.Point(79, 65);
+            this.passwordTextBox.Location = new System.Drawing.Point(78, 65);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(199, 20);
             this.passwordTextBox.TabIndex = 1;
@@ -132,6 +133,7 @@
             this.Controls.Add(this.loginPanel);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.loginPanel.ResumeLayout(false);
             this.loginPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

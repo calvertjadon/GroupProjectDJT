@@ -254,5 +254,10 @@ namespace GroupProjectDJT
 
 			return seatLabels;
 		}
+
+		private void profilePanel_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
 	}
 }

@@ -65,7 +65,7 @@ namespace GroupProjectDJT
                 // set bool to true of it needs a menu item.  otherwise it will be hidden.
                 {"Home", new Pair<bool, MenuForm>(true, new Home())},
                 {"ShowEvents", new Pair<bool, MenuForm>(true, new ShowEvents(this))},
-                {"ReservationForm", new Pair<bool, MenuForm>(false, new ReservationForm())},
+                {"ReservationForm", new Pair<bool, MenuForm>(false, new ReservationForm(this))},
                 {"MembershipForm", new Pair<bool, MenuForm>(true, new MembershipForm(this))},
                 {"LoginForm", new Pair<bool, MenuForm>(true, new LoginForm(this))},
                 {"Profile", new Pair<bool, MenuForm>(false, new Profile(this))},
@@ -168,6 +168,12 @@ namespace GroupProjectDJT
 
             ShowEvents ShowEventsForm = (ShowEvents)_forms["ShowEvents"].Second;
             ShowEventsForm.populateDataGrid();
+
+            ReservationDetails detailsForm = ((ReservationDetails)_forms["ReservationDetails"].Second);
+            detailsForm.memberID = "0";
+
+
+
 
             showPanel("Login");
         }

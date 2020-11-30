@@ -136,8 +136,6 @@
             this.checkBox97 = new System.Windows.Forms.CheckBox();
             this.checkBox98 = new System.Windows.Forms.CheckBox();
             this.seatsPanel = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.eventIdLabel = new System.Windows.Forms.Label();
@@ -1884,8 +1882,6 @@
             // 
             // seatsPanel
             // 
-            this.seatsPanel.Controls.Add(this.label26);
-            this.seatsPanel.Controls.Add(this.label25);
             this.seatsPanel.Controls.Add(this.label2);
             this.seatsPanel.Controls.Add(this.button1);
             this.seatsPanel.Controls.Add(this.eventIdLabel);
@@ -1922,28 +1918,10 @@
             this.seatsPanel.Tag = "Seats";
             this.seatsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.seatsPanel_Paint);
             // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(667, 312);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(41, 13);
-            this.label26.TabIndex = 8;
-            this.label26.Text = "label26";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(667, 245);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(41, 13);
-            this.label25.TabIndex = 7;
-            this.label25.Text = "label25";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(664, 223);
+            this.label2.Location = new System.Drawing.Point(607, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 6;
@@ -1962,7 +1940,7 @@
             // eventIdLabel
             // 
             this.eventIdLabel.AutoSize = true;
-            this.eventIdLabel.Location = new System.Drawing.Point(634, 38);
+            this.eventIdLabel.Location = new System.Drawing.Point(633, 39);
             this.eventIdLabel.Name = "eventIdLabel";
             this.eventIdLabel.Size = new System.Drawing.Size(41, 13);
             this.eventIdLabel.TabIndex = 4;
@@ -2325,7 +2303,5 @@
         private System.Windows.Forms.Label eventIdLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
     }
 }

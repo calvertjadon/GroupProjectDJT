@@ -21,7 +21,7 @@ namespace GroupProjectDJT
 
         private void homePanel_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
     }
 }

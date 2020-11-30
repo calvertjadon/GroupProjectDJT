@@ -17,6 +17,7 @@ namespace GroupProjectDJT
         private Main _parent;
 
         private List<int> _disabledEvents;
+        
 
         public ShowEvents(Main parent)
         {
@@ -46,9 +47,12 @@ namespace GroupProjectDJT
 
             string EventId = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             string EventTitle = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string EventDate = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
 
             reservationForm.EventId = EventId;
             reservationForm.EventTitle = EventTitle;
+            reservationForm.Eventdate = EventDate;
+            
             reservationForm.clearSeatSelection();
 
             ReservationForm showSeatsForm = ((ReservationForm) _parent._forms["ReservationForm"].Second);
@@ -117,6 +121,8 @@ namespace GroupProjectDJT
 
                     var row = dataGridView1.Rows.Add(eventID, name, description, date, time, price, vipPrice); //adds to datagridview
 
+                    
+                    
                     if (_disabledEvents.Contains(Int32.Parse(eventID)))
                     {
                         dataGridView1.Rows[row].Visible = false;
