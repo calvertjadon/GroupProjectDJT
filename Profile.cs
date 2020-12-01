@@ -150,6 +150,9 @@ namespace GroupProjectDJT
 			ReservationDetailsForm.EventDate = EventDate;
             ReservationDetailsForm.Seats = getSeatsFromReservation(Int32.Parse(ReservationID));
 
+            ReservationDetailsForm.showCancelButton = true;
+            ReservationDetailsForm.showFinalizeButton = false;
+
 			_parent.showPanel("Reservation Details");
 		}
 

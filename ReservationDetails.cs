@@ -16,11 +16,25 @@ namespace GroupProjectDJT
 		public override Panel MainPanel => reservaionDetailsPanel;
 		public string memberid_ = "0";
 		double sum_;
-		
-		
+        private string _eventId;
 
+        public Boolean showCancelButton
+        {
+            set
+            {
+                cancelReservationButton.Visible = value;
+            }
+        }
 
-public int ReservationId {
+        public Boolean showFinalizeButton
+        {
+            set
+            {
+                button1.Visible = value;
+            }
+        }
+
+		public int ReservationId {
 			get;
 			set;
 		}
@@ -32,6 +46,16 @@ public int ReservationId {
 				eventNameLabel.Text = $@"Event: {value}";
 			}
 		}
+
+        public string EventId
+        {
+            get => _eventId;
+            set
+            {
+                eventIdLabel.Text = $@"Event ID: {value}";
+                _eventId = value;
+            }
+        }
 
 		public string EventDate
 		{
@@ -46,8 +70,8 @@ public int ReservationId {
 			set
 			{
 				seatsReservedLabel.Text = "Seats Reserved: " + (String.Join(", ", value));
-				
-			}
+
+            }
 		}
 
 		public double sum
@@ -65,6 +89,12 @@ public int ReservationId {
 			set
 			{
 				label1.Text = "Current cost of reservation: $" + value.ToString();
+
+                if (_parent.MemberId > 0)
+                {
+                    label1.Text += Environment.NewLine + "10% off!";
+                }
+
 				sum_ = value;
 			}
 		}
@@ -91,8 +121,8 @@ public int ReservationId {
 				{
 					label3.Text = memberid_ + " is your membership id ";
 					//apply discount 
-					sum_ = sum_ * 0.90;
-					label1.Text = sum_.ToString();
+					//sum_ = sum_ * 0.90;
+					//label1.Text = sum_.ToString();
 				}
 			}
 		}
@@ -201,5 +231,115 @@ private void cancelReservationButton_Click(object sender, EventArgs e)
 		{
 
 		}
-	}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+
+			MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection(connStr);
+
+            try
+            {
+                Console.WriteLine("Connecting to MySQL...");
+                conn.Open();
+                string sql = "INSERT INTO djt_reservation (eventID, memberID) VALUES (@eventID, @memberID)";
+
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@eventID", EventId);
+                cmd.Parameters.AddWithValue("@memberID", memberID);
+                
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+            try
+            {
+
+                string sql = "SELECT id FROM djt_reservation ORDER BY id DESC LIMIT 1";
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn);
+
+
+                MySqlDataReader myReader = cmd.ExecuteReader();
+                if (myReader.Read())
+                {
+
+                    ReservationId = Int32.Parse(myReader["id"].ToString());
+
+
+
+                }
+                myReader.Close();
+
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+
+
+            var checkboxes = ((ReservationForm) _parent._forms["ReservationForm"].Second).checkboxes;
+			var checked_ids = new List<string>();
+
+			foreach (var checkBox in checkboxes)
+            {
+                if (checkBox.Checked)
+                {
+                    checked_ids.Add(checkBox.Tag.ToString());
+                }
+            }
+
+			foreach (string seatId in checked_ids)
+            {
+				// create seat reservation for every checked seat
+				try
+                {
+                    string sql = "INSERT INTO djt_seat_reservation (reservationId, seatId) VALUES (@reservationId, @seatId)";
+
+                    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@reservationId", ReservationId);
+                    cmd.Parameters.AddWithValue("@seatId", seatId);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+			}
+
+            conn.Close();
+            Console.WriteLine("Done.");   //insert into resevation
+
+
+            ShowEvents ShowEventsForm = (ShowEvents)_parent._forms["ShowEvents"].Second;
+            ShowEventsForm.populateDataGrid();
+
+            Profile ProfileForm = (Profile)_parent._forms["Profile"].Second;
+            ProfileForm.loadEventHistory();
+
+            if (_parent.MemberId > 0)
+            {
+				_parent.showPanel("Profile");
+			}
+            else
+            {
+				_parent.showPanel("Upcoming Events");
+                MessageBox.Show($@"Your reservation Id is: {ReservationId}");
+            }
+			
+
+		}
+    }
 }

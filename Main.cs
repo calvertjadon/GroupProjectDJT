@@ -70,6 +70,7 @@ namespace GroupProjectDJT
                 {"LoginForm", new Pair<bool, MenuForm>(true, new LoginForm(this))},
                 {"Profile", new Pair<bool, MenuForm>(false, new Profile(this))},
                 {"ReservationDetails", new Pair<bool, MenuForm>(false, new ReservationDetails(this))},
+                {"CancelReservation", new Pair<bool, MenuForm>(true, new CancelReservation(this))}
 
             };
 
@@ -141,6 +142,8 @@ namespace GroupProjectDJT
             _forms["LoginForm"].First = false;
             _forms["MembershipForm"].First = false;
             _forms["Profile"].First = true;
+            _forms["CancelReservation"].First = false;
+
             ShowLogoutMenuItem = true;
 
             Profile ProfileForm = (Profile)_forms["Profile"].Second;
@@ -162,6 +165,7 @@ namespace GroupProjectDJT
             _forms["LoginForm"].First = true;
             _forms["MembershipForm"].First = true;
             _forms["Profile"].First = false;
+            _forms["CancelReservation"].First = true;
             ShowLogoutMenuItem = false;
 
             refreshMenu();

@@ -36,11 +36,13 @@
             this.seatsReservedLabel = new System.Windows.Forms.Label();
             this.eventDateLabel = new System.Windows.Forms.Label();
             this.eventNameLabel = new System.Windows.Forms.Label();
+            this.eventIdLabel = new System.Windows.Forms.Label();
             this.reservaionDetailsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // reservaionDetailsPanel
             // 
+            this.reservaionDetailsPanel.Controls.Add(this.eventIdLabel);
             this.reservaionDetailsPanel.Controls.Add(this.button1);
             this.reservaionDetailsPanel.Controls.Add(this.label3);
             this.reservaionDetailsPanel.Controls.Add(this.label1);
@@ -63,6 +65,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Finalize reservation!";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -120,6 +123,15 @@
             this.eventNameLabel.TabIndex = 0;
             this.eventNameLabel.Text = "<event name>";
             // 
+            // eventIdLabel
+            // 
+            this.eventIdLabel.AutoSize = true;
+            this.eventIdLabel.Location = new System.Drawing.Point(590, 284);
+            this.eventIdLabel.Name = "eventIdLabel";
+            this.eventIdLabel.Size = new System.Drawing.Size(69, 13);
+            this.eventIdLabel.TabIndex = 6;
+            this.eventIdLabel.Text = "eventIdLabel";
+            // 
             // ReservationDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,5 +156,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label eventIdLabel;
     }
 }

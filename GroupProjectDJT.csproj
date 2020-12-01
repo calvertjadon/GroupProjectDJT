@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CancelReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelReservation.Designer.cs">
+      <DependentUpon>CancelReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="ShowEvents.Designer.cs">
       <DependentUpon>ShowEvents.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CancelReservation.resx">
+      <DependentUpon>CancelReservation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

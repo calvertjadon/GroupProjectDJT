@@ -41,7 +41,7 @@ namespace GroupProjectDJT
 
 
 
-
+        private int numSelected = 0;
 
         private string _eventId;
 
@@ -52,7 +52,7 @@ namespace GroupProjectDJT
                 _eventId = value;
                 eventIdLabel.Text = "Event ID: " + _eventId;
             }
-
+            
             get => _eventId;
         }
 
@@ -101,7 +101,7 @@ namespace GroupProjectDJT
             {"Unavailable", Color.Red}
         };
 
-        private List<CheckBox> checkboxes;
+        public List<CheckBox> checkboxes;
 
         private int seatLimit = 4;
 
@@ -137,7 +137,7 @@ namespace GroupProjectDJT
 
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            int numSelected = 0;
+            numSelected = 0;
             foreach (var checkbox in checkboxes)
             {
                 if (checkbox.Checked)
@@ -169,89 +169,119 @@ namespace GroupProjectDJT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //get the price and VIP price from the database
-
-            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
-            MySql.Data.MySqlClient.MySqlConnection conn3 = new MySql.Data.MySqlClient.MySqlConnection(connStr);
-
-            double price2 = 0.0;
-            double vipPrice2 = 0.0;
-
-            try
+            if (getCheckedSeats().Count == 0)
             {
+                MessageBox.Show("You must select at least one seat!");
+            } else
+            {
+                //get the price and VIP price from the database
 
-                Console.WriteLine("Connecting to MySQL...");
-                conn3.Open();
-                string sql = "SELECT price, vipPrice FROM djt_event WHERE eventID = @eventID";
-                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn3);
+                ((ReservationDetails)_parent._forms["ReservationDetails"].Second).showCancelButton = false;
+                ((ReservationDetails)_parent._forms["ReservationDetails"].Second).showFinalizeButton = true;
 
-                cmd.Parameters.AddWithValue("@eventID", _eventId);
+                string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+                MySql.Data.MySqlClient.MySqlConnection conn3 = new MySql.Data.MySqlClient.MySqlConnection(connStr);
 
+                double price2 = 0.0;
+                double vipPrice2 = 0.0;
 
-                MySqlDataReader myReader = cmd.ExecuteReader();
-                while (myReader.Read())
+                try
                 {
 
-                    String price = myReader["price"].ToString();
-                    String vipPrice = myReader["vipPrice"].ToString();
+                    Console.WriteLine("Connecting to MySQL...");
+                    conn3.Open();
+                    string sql = "SELECT price, vipPrice FROM djt_event WHERE eventID = @eventID";
+                    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn3);
 
-                     price2 = Convert.ToDouble(price);
-                     vipPrice2 = Convert.ToDouble(vipPrice);
+                    cmd.Parameters.AddWithValue("@eventID", _eventId);
 
-                  
-                   
 
+                    MySqlDataReader myReader = cmd.ExecuteReader();
+                    while (myReader.Read())
+                    {
+
+                        String price = myReader["price"].ToString();
+                        String vipPrice = myReader["vipPrice"].ToString();
+
+                        price2 = Convert.ToDouble(price);
+                        vipPrice2 = Convert.ToDouble(vipPrice);
+
+
+
+
+                    }
+                    myReader.Close();
                 }
-                myReader.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            conn3.Close();
-            Console.WriteLine("Done.");
-
-
-            double sum = 0.0;
-
-            foreach (var checkbox in checkboxes)
-            {
-                if (checkbox.Checked)
+                catch (Exception ex)
                 {
-
-                    String checkboxTag = checkbox.Tag.ToString();
-                    int tag = Convert.ToInt32(checkboxTag);
-                    
-
-
-                    if (tag > 32)
-                    {
-                        
-                        sum = sum + price2;
-                        
-                    }
-                    else
-                    {
-                        
-                        sum = sum + vipPrice2;
-                        
-                    }
-
-
+                    Console.WriteLine(ex.ToString());
                 }
+                conn3.Close();
+                Console.WriteLine("Done.");
+
+
+                double sum = 0.0;
+
+                foreach (var checkbox in checkboxes)
+                {
+                    if (checkbox.Checked)
+                    {
+
+                        String checkboxTag = checkbox.Tag.ToString();
+                        int tag = Convert.ToInt32(checkboxTag);
+
+
+
+                        if (tag > 32)
+                        {
+
+                            sum = sum + price2;
+
+                        }
+                        else
+                        {
+
+                            sum = sum + vipPrice2;
+
+                        }
+
+
+                    }
+                }
+
+                if (_parent.MemberId > 0)
+                {
+                    sum = sum * 0.90;
+                    //label1.Text = sum.ToString();
+                    ((ReservationDetails)_parent._forms["ReservationDetails"].Second).sum = sum;
+                }
+
+                List<string> checked_seat_ids = new List<string>();
+                foreach (CheckBox checkbox in checkboxes)
+                {
+                    if (checkbox.Checked)
+                    {
+                        checked_seat_ids.Add(checkbox.Tag.ToString());
+                    }
+                }
+
+                var selected_seat_labels = getSeatLabels(checked_seat_ids);
+                Console.WriteLine(string.Join(", ", selected_seat_labels));
+
+                //need to swap to Reservation details and pass the sum to that class as well.
+
+                ReservationDetails detailsForm = ((ReservationDetails)_parent._forms["ReservationDetails"].Second);
+                detailsForm.sum = sum;
+                detailsForm.EventName = EventTitle;
+                detailsForm.EventDate = Eventdate;
+                detailsForm.EventId = _eventId;
+                detailsForm.Seats = getSeatLabels(getCheckedSeats());
+
+
+                _parent.showPanel("Reservation Details");
+
             }
 
-
-            //need to swap to Reservation details and pass the sum to that class as well.
-
-           ReservationDetails detailsForm = ((ReservationDetails)_parent._forms["ReservationDetails"].Second);
-            detailsForm.sum = sum;
-            detailsForm.EventName = EventTitle;
-            detailsForm.EventDate = Eventdate;
-            
-
-            _parent.showPanel("Reservation Details");
-            
 
         }
 
@@ -277,6 +307,68 @@ namespace GroupProjectDJT
                     cb.BackColor = _checkboxColors["Unchecked"];
                 }
             }
+        }
+
+        private List<string> getCheckedSeats()
+        {
+            var checkedSeats = new List<string>();
+
+            foreach (CheckBox checkBox in checkboxes)
+            {
+                if (checkBox.Checked)
+                {
+                    checkedSeats.Add(checkBox.Tag.ToString());
+                }
+            }
+
+            return checkedSeats;
+        }
+
+        private List<string> getSeatLabels(List<string> seat_ids)
+        {
+            List<string> selected_seats = new List<string>();
+
+            DataTable myTable = new DataTable();
+
+            string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            Console.WriteLine("Connecting to MySQL...");
+            conn.Open();
+
+            foreach (string seatId in seat_ids)
+            {
+                try
+                {
+                    
+                    string sql = $@"SELECT
+	                            seatLabel
+                            FROM
+	                            djt_seat
+                            WHERE
+	                            id=@seatId;";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@seatId", seatId);
+
+                    MySqlDataAdapter myAdapter = new MySqlDataAdapter(cmd);
+                    myAdapter.Fill(myTable);
+                    Console.WriteLine("Table is ready.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+            
+            conn.Close();
+            //convert the retrieved data to events and save them to the list
+            foreach (DataRow row in myTable.Rows)
+            {
+                selected_seats.Add(row["seatLabel"].ToString());
+            }
+
+            return selected_seats;
         }
 
         private List<int> getUnavailableSeats()
