@@ -109,11 +109,11 @@ namespace GroupProjectDJT
 
                     name = myReader["name"].ToString();
                     description = myReader["description"].ToString();
-                    date = myReader["date"].ToString() + "$";
+                    date = myReader["date"].ToString();
                     time = myReader["time"].ToString();
                     price = myReader["price"].ToString();
                     vipPrice = myReader["vipPrice"].ToString();
-                    date = date.Substring(0, 10); //cuts off annoying timestamp 
+                    //date = date.Substring(0, 10); //cuts off annoying timestamp 
 
                     price = "$" + price;
                     vipPrice = "$" + vipPrice;
