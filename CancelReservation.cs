@@ -97,6 +97,7 @@ WHERE
 
             return (dt - today).Days > 2;
         }
+
 		private void deleteReservation(int ReservationId)
 		{
 			string connStr = "server=157.89.28.130;user=ChangK;database=csc340;port=3306;password=Wallace#409;";
